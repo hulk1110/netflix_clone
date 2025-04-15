@@ -1,4 +1,25 @@
+
+Steps:-->
+
+-Create React App
+-Configured TailwindCss
+- Header
+- Routing of App
+- Login Form
+- Sign up Form
+- Form Validation
+- useRef Hook
+
+
+
+
+
 Features:
+
+
+
+
+
 
 -Login/Sign Up
    -Sign In/ SIgn Up Form

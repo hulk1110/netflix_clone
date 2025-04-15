@@ -1,13 +1,25 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Header } from "./Header";
+import { checkValidData } from "../utils/validate";
 
 export const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
+  const [error, setError] = useState("");
+  const email = useRef(null);
+  const password = useRef(null);
 
   const toggleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
   };
 
+  const handleBtnClick = () => {
+    //validate form Data
+    console.log(email.current.value);
+    console.log(password.current.value);
+    const message = checkValidData(email.current.value, password.current.value);
+    console.log(message);
+    setError(message);
+  };
   return (
     <div className="relative h-screen w-screen">
       {/* Background image */}
@@ -30,13 +42,8 @@ export const Login = () => {
             <h1 className="text-3xl font-bold mb-6">
               {isSignInForm ? "Sign In" : "Sign Up"}
             </h1>
-            <form className="space-y-4">
-              <input
-                type="text"
-                placeholder="Email"
-                className="w-full p-3 rounded bg-gray-700 focus:outline-none"
-              />
 
+            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
               {/* Full Name field only for Sign Up */}
               {!isSignInForm && (
                 <input
@@ -47,14 +54,24 @@ export const Login = () => {
               )}
 
               <input
+                ref={email}
+                type="text"
+                placeholder="Email"
+                className="w-full p-3 rounded bg-gray-700 focus:outline-none"
+              />
+
+              <input
+                ref={password}
                 type="password"
                 placeholder="Password"
                 className="w-full p-3 rounded bg-gray-700 focus:outline-none"
               />
 
+              <p className="text-red-500">{error}</p>
               <button
                 type="submit"
                 className="w-full bg-red-600 hover:bg-red-700 transition p-3 rounded font-semibold"
+                onClick={handleBtnClick}
               >
                 {isSignInForm ? "Sign In" : "Sign Up"}
               </button>
