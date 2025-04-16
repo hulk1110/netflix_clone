@@ -9,6 +9,8 @@ Steps:-->
 - Sign up Form
 - Form Validation
 - useRef Hook
+- firebase setup
+- deployment 
 
 
 
