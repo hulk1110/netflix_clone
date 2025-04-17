@@ -14,17 +14,19 @@ export const Header = () => {
   const navigate = useNavigate();
 
   const handleSignOut = () => {
+    console.log("Sign out triggered");  
     signOut(auth)
-      .then(() => {})
-
+      .then(() => {
+        console.log("Signed out from Firebase");
+      })
       .catch((error) => {
-        console.error("Error signing out:", error);
+        console.error("Sign out failed:", error);
         navigate("/error");
       });
   };
-
+  
   useEffect(() => {
-    const unsubscibe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         const { uid, email, displayName, photoURL } = user;
         dispatch(
@@ -35,17 +37,15 @@ export const Header = () => {
             photoURL: photoURL,
           })
         );
-
         navigate("/browse");
       } else {
-        // User is signed out
         dispatch(removeUser());
         navigate("/");
       }
     });
 
-    // below line make sure to unsubscibe when component unmounts
-    return () => unsubscibe();
+    // Unsiubscribe when component unmounts
+    return () => unsubscribe();
   }, []);
 
   return (
@@ -63,11 +63,8 @@ export const Header = () => {
             alt="User Icon"
             className="w-10 h-10 rounded cursor-pointer"
           />
-          <button
-            onClick={handleSignOut}
-            className="text-white font-semibold hover:underline"
-          >
-            Sign Out
+          <button onClick={handleSignOut} className="font-bold text-white z-50">
+            (Sign Out)
           </button>
         </div>
       )}
