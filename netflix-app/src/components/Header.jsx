@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { addUser, removeUser } from "../utils/userSlice";
+import { LOGO } from "../utils/constant";
 
 export const Header = () => {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ export const Header = () => {
   };
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsubscibe = onAuthStateChanged(auth, (user) => {
       if (user) {
         const { uid, email, displayName, photoURL } = user;
         dispatch(
@@ -42,12 +43,15 @@ export const Header = () => {
         navigate("/");
       }
     });
+
+    // below line make sure to unsubscibe when component unmounts
+    return () => unsubscibe();
   }, []);
 
   return (
     <div className="absolute px-8 py-2 bg-gradient-to-b from-black w-full flex justify-between items-center">
       <img
-        src="https://www.freepnglogos.com/uploads/netflix-logo-0.png"
+        src={LOGO}
         alt="Netflix Logo"
         className="w-44"
       />

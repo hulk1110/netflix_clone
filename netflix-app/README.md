@@ -14,6 +14,7 @@ Steps:-->
 - Created Redux store with userSlice
 -implement sign out
 -update profile
+-- bug fixes related to routing
 -featch from TMDB MOvies
 
 
