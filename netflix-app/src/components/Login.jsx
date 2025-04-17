@@ -39,7 +39,7 @@ export const Login = () => {
           updateProfile(user, {
             displayName: name.current.value,
             photoURL:
-              {photoURL},
+              photoURL,
           })
             .then(() => {
               // Profile updated!
