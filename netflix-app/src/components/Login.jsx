@@ -1,9 +1,12 @@
 import React, { useRef, useState } from "react";
 import { Header } from "./Header";
 import { checkValidData } from "../utils/validate";
-import { auth} from "../utils/firebase";
-import {  createUserWithEmailAndPassword , signInWithEmailAndPassword ,updateProfile} from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { auth } from "../utils/firebase";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 export const Login = () => {
@@ -12,8 +15,8 @@ export const Login = () => {
   const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
-   const navigate =useNavigate();
-   const dispatch = useDispatch();
+
+  const dispatch = useDispatch();
 
   const toggleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
@@ -33,27 +36,29 @@ export const Login = () => {
         .then((userCredential) => {
           const user = userCredential.user;
           updateProfile(user, {
-            displayName: name.current.value, photoURL: "https://avatars.githubusercontent.com/u/13083433?s=400&u=cf2350f56ba811e4a7faf0f5aead1d0a730c08f5&v=4"
-          }).then(() => {
-            // Profile updated!
-            const { uid, email, displayName, photoURL } = auth.currentUser;
-            dispatch(
-                      addUser({
-                        uid: uid,
-                        email: email,
-                        displayName: displayName,
-                        photoURL: photoURL,
-                      })
-                    )
-            navigate('/browse')
-          }).catch((error) => {
-            // An error occurred
-            // ...
-            setError(error.message)
-          });
+            displayName: name.current.value,
+            photoURL:
+              "https://avatars.githubusercontent.com/u/13083433?s=400&u=cf2350f56ba811e4a7faf0f5aead1d0a730c08f5&v=4",
+          })
+            .then(() => {
+              // Profile updated!
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                })
+              );
+            })
+            .catch((error) => {
+              // An error occurred
+              // ...
+              setError(error.message);
+            });
 
           console.log("User signed up:", user);
-          navigate('/browse')
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -65,11 +70,7 @@ export const Login = () => {
       signInWithEmailAndPassword(auth, emailValue, passwordValue)
         .then((userCredential) => {
           const user = userCredential.user;
-
-
-
           console.log("User signed in:", user);
-          navigate('/browse')
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -77,7 +78,6 @@ export const Login = () => {
           setError(`${errorMessage} (${errorCode})`);
         });
     }
- 
   };
   return (
     <div className="relative h-screen w-screen">
@@ -106,7 +106,7 @@ export const Login = () => {
               {/* Full Name field only for Sign Up */}
               {!isSignInForm && (
                 <input
-                ref={name}
+                  ref={name}
                   type="text"
                   placeholder="Full Name"
                   className="w-full p-3 rounded bg-gray-700 focus:outline-none"

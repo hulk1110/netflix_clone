@@ -12,6 +12,9 @@ Steps:-->
 - firebase setup
 - deployment 
 - Created Redux store with userSlice
+-implement sign out
+-update profile
+-featch from TMDB MOvies
 
 
 
