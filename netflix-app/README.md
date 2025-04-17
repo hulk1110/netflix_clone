@@ -41,4 +41,9 @@ Features:
             -MovieLists * N 
  -Netflix Gpt 
    --Search Bar
-   --Movie Suggestions         
+   --Movie Suggestions     
+
+
+   themoviedb credentials:
+
+   nishant.monty, nishant@fisglobal.com, *Hulk1110    
