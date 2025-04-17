@@ -11,6 +11,7 @@ Steps:-->
 - useRef Hook
 - firebase setup
 - deployment 
+- Created Redux store with userSlice
 
 
 
