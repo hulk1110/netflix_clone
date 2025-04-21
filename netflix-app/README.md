@@ -46,4 +46,4 @@ Features:
 
    themoviedb credentials:
 
-   nishant.monty, nishant@fisglobal.com, *Hulk1110    
+   nishant.monty, nishant@fisglobal.com 
